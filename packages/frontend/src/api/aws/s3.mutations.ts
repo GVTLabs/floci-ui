@@ -130,9 +130,19 @@ export function usePutBucketVersioningMutation(
 export function usePutBucketTagsMutation(
   options?: UseMutationOptions<void, Error, PutBucketTagsInput>,
 ) {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: ({ bucket, tags }) => s3Client.putBucketTags(bucket, tags),
     ...options,
+    onSuccess: (...args) => {
+      const [, variables] = args;
+      void queryClient.invalidateQueries({
+        queryKey: s3QueryKeys.bucketTags(variables.bucket),
+      });
+      void queryClient.invalidateQueries({ queryKey: s3QueryKeys.buckets });
+      options?.onSuccess?.(...args);
+    },
   });
 }
 
