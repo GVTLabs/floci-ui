@@ -66,7 +66,7 @@ export function createEc2Router(svc: Ec2Service = ec2Service) {
         }
     })
 
-    app.delete('/instances/:instanceId', async (c) => {
+    app.post('/instances/:instanceId/terminate', async (c) => {
         try {
             await svc.terminateInstance(c.req.param('instanceId'))
             return c.json({ok: true})

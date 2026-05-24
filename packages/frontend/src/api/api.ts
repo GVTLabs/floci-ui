@@ -652,7 +652,7 @@ export const endpointRegistry: EndpointRegistry = new Map([
   ],
   [
     apiEndpointKeys.aws.ec2.instances.terminate,
-    { path: "/ec2/instances/:instanceId", method: "DELETE", telemetry: { provider: "aws", service: "ec2" } },
+    { path: "/ec2/instances/:instanceId/terminate", method: "POST", telemetry: { provider: "aws", service: "ec2" } },
   ],
   [
     apiEndpointKeys.aws.ec2.instances.tags,

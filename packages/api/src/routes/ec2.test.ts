@@ -191,9 +191,9 @@ describe('POST /instances/:id/start', () => {
     })
 })
 
-describe('DELETE /instances/:id', () => {
+describe('POST /instances/:id/terminate', () => {
     test('terminates instance and returns ok', async () => {
-        const res = await app.request('/instances/i-test1', {method: 'DELETE'})
+        const res = await app.request('/instances/i-test1/terminate', {method: 'POST'})
         expect(res.status).toBe(200)
         expect((await res.json() as {ok: boolean}).ok).toBe(true)
     })
